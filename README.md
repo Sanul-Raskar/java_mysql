@@ -30,9 +30,9 @@ use student;
 ## Create Table
 ``` sql
 CREATE TABLE branch (
-    branch_id int NOT NULL AUTO_INCREMENT,
-   	branch_name varchar(10) NOT NULL,
-	PRIMARY KEY (branch_id)
+    branch_id int NOT NULL AUTO_INCREMENT,
+    branch_name varchar(10) NOT NULL,
+    PRIMARY KEY (branch_id)
 );
 ```
 create table branch(branch_id int not null auto_increment,branch_name varchar(10) not null, primary key(branch_id));
@@ -43,13 +43,13 @@ describe branch;
 
 ``` sql
 CREATE TABLE students (
-    stud_id int NOT NULL AUTO_INCREMENT,
-   	name varchar(30) NOT NULL,
-	email varchar(60), 
-	mobile varchar(15),
-	gender varchar(8),
-	branch_id int,
-    PRIMARY KEY (stud_id),
+    stud_id int NOT NULL AUTO_INCREMENT,
+    name varchar(30) NOT NULL,
+    email varchar(60), 
+    mobile varchar(15),
+    gender varchar(8),
+    branch_id int,
+    PRIMARY KEY (stud_id),
     FOREIGN KEY (branch_id) REFERENCES branch(branch_id)
 );
 ```
@@ -64,9 +64,9 @@ insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH')
 ## Create table for student count
 ``` sql
 CREATE TABLE stats (
-    id int NOT NULL,
-   	total_students int NOT NULL DEFAULT 0,
-	PRIMARY KEY (id)
+    id int NOT NULL,
+    total_students int NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
 );
 ```
 
