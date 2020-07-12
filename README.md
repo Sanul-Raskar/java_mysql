@@ -160,3 +160,23 @@ public static Connection createConnection() {
         return con;
     }
 ```
+
+## Drop database
+``` sql
+DROP DATABASE databasename;
+```
+
+## Drop table
+``` sql
+DROP TABLE table_name;
+```
+
+## Show triggers
+```sql
+show triggers from student;
+```
+
+## Drop trigger
+```sql
+DROP TRIGGER before_billing_update;
+```
