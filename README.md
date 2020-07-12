@@ -134,3 +134,29 @@ delimiter $$
 create trigger after_student_delete after delete on students for each row begin declare studcount int; select count(*) into studcount from students; update stats set total_students = studcount where id=1; end$$
 
 delimiter ;
+
+
+## Connection Code
+```java
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public static Connection createConnection() {
+        Connection con = null;
+        String URL = "jdbc:mysql://localhost:3306/student";
+        String user = "sanul";
+        String password = "sanul123";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(URL, user, password);
+            System.out.println("Connected to MySQL");
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Java_mysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return con;
+    }
+```
