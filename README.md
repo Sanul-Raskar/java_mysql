@@ -64,8 +64,7 @@ create table students(stud_id int not null auto_increment, name varchar(30) not 
 
 ## Insert into students table
 ``` sql
-INSERT INTO students(name,email,mobile,gender,branch_id)
-values('Sanul','sanul@test.com','9884534542','Male',1);
+INSERT INTO students(name,email,mobile,gender,branch_id)values('Sanul','sanul@test.com','9884534542','Male',1);
 ```
 
 ## Create table for student count
@@ -90,8 +89,7 @@ select * from students;
 
 ## Update data from students table
 ```sql
-UPDATE students SET name = 'newName',email = 'new@test.com',mobile = '9845377893',
-gender = 'Female',branch_id = '3' WHERE stud_id = 1;
+UPDATE students SET name = 'newName',email = 'new@test.com',mobile = '9845377893',gender = 'Female',branch_id = '3' WHERE stud_id = 1;
 ```
 
 ## Delete data from students table
