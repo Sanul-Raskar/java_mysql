@@ -41,6 +41,13 @@ create table branch(branch_id int not null auto_increment,branch_name varchar(10
 describe branch;
 ```
 
+## Insert into branch table
+``` sql
+insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
+```
+insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
+
+## Create students table
 ``` sql
 CREATE TABLE students (
     stud_id int NOT NULL AUTO_INCREMENT,
@@ -55,11 +62,10 @@ CREATE TABLE students (
 ```
 create table students(stud_id int not null auto_increment, name varchar(30) not null, email varchar(60), mobile varchar(15),gender varchar(8),branch_id int, primary key(stud_id), foreign key (branch_id) references branch(branch_id));
 
-## Insert into branch table
+## Insert into students table
 ``` sql
-insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
+INSERT INTO students(name,email,mobile,gender,branch_id)values('Sanul','sanul@test.com','9884534542','Male',1);
 ```
-insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
 
 ## Create table for student count
 ``` sql
@@ -75,6 +81,21 @@ create table stats(id int not null,total_students int not null default 0, primar
 ## Insert into stats table
 insert into stats(id)values(1);
 
+
+## Retrieve data from students table
+```sql
+select * from students;
+```
+
+## Update data from students table
+```sql
+UPDATE students SET name = 'newName',email = 'new@test.com',mobile = '9845377893',gender = 'Female',branch_id = '3' WHERE stud_id = 1;
+```
+
+## Delete data from students table
+```sql
+DELETE FROM students WHERE stud_id = 1;
+```
 
 ## Download MySQL connector
 
