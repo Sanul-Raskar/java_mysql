@@ -2,7 +2,23 @@
 
 This repository is basic example to perform curd operations using Java swing and mysql database.
 
-## Create new mysql user
+
+## Start MySQL service
+On Linux:
+```bash
+$ sudo systemctl start mysql
+```
+On macOS:
+```zsh
+% brew services start mysql
+```
+
+## Login to MySQL shell with root user
+```bash
+$ mysql -u root -p
+```
+
+## Create new MySQL user
 ``` sql
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY ‘password';
 
@@ -11,14 +27,10 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-
-## Start sql server
-``` bash
-$ mysql.server start
-$ brew services start mysql
-
-$ mysql -u root -p
-$ mysql -u sanul -p
+## Login with new user
+Use newly created user in java code and while creating database.
+```bash
+$ mysql -u newuser -p
 ```
 
 ## Create Database
@@ -26,6 +38,11 @@ $ mysql -u sanul -p
 create database student;
 use student;
 ```
+
+<p align="center">
+<img src="/output/tables.png">
+<h6 style="text-align:center">Tables</h6>
+</p>
 
 ## Create Table
 ``` sql
@@ -35,7 +52,6 @@ CREATE TABLE branch (
     PRIMARY KEY (branch_id)
 );
 ```
-create table branch(branch_id int not null auto_increment,branch_name varchar(10) not null, primary key(branch_id));
 
 ``` sql
 describe branch;
@@ -43,9 +59,8 @@ describe branch;
 
 ## Insert into branch table
 ``` sql
-insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
+INSERT INTO branch(branch_name)VALUES('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
 ```
-insert into branch(branch_name)values('IT'),('COMP'),('ENTC'),('CIVIL'),('MECH');
 
 ## Create students table
 ``` sql
@@ -60,11 +75,10 @@ CREATE TABLE students (
     FOREIGN KEY (branch_id) REFERENCES branch(branch_id)
 );
 ```
-create table students(stud_id int not null auto_increment, name varchar(30) not null, email varchar(60), mobile varchar(15),gender varchar(8),branch_id int, primary key(stud_id), foreign key (branch_id) references branch(branch_id));
 
 ## Insert into students table
 ``` sql
-INSERT INTO students(name,email,mobile,gender,branch_id)values('Sanul','sanul@test.com','9884534542','Male',1);
+INSERT INTO students(name,email,mobile,gender,branch_id)VALUES('Sanul','sanul@test.com','9884534542','Male',1);
 ```
 
 ## Create table for student count
@@ -76,15 +90,14 @@ CREATE TABLE stats (
 );
 ```
 
-create table stats(id int not null,total_students int not null default 0, primary key(id));
-
 ## Insert into stats table
-insert into stats(id)values(1);
-
+```sql
+INSERT INTO stats(id)values(1);
+```
 
 ## Retrieve data from students table
 ```sql
-select * from students;
+SELECT * FROM students;
 ```
 
 ## Update data from students table
@@ -101,19 +114,19 @@ DELETE FROM students WHERE stud_id = 1;
 
 https://dev.mysql.com/downloads/
 
-https://dev.mysql.com/downloads/connector/j/
-
 Select Connector/J
 Select Operating System: Platform Independent
-Download zip file
+Download ZIP file
 Unzip it and copy mysql-connector-java.jar file to netbeans project.
 
 Link jar file 
-Project Properties > Libraries > Compile time libraries> add jar
+Project Properties > Libraries > Compile time libraries > add jar
 
 
 
 ## AFTER INSERT Trigger
+Update total_students value in 'stats' table whenever new record is inserted in 'students' table
+
 ``` sql
 DELIMITER $$
 
@@ -129,13 +142,10 @@ END$$
 DELIMITER ;
 ```
 
-delimiter $$
-
-create trigger after_student_insert after insert on students for each row begin declare studcount int; select count(*) into studcount from students; update stats set total_students = studcount where id=1; end$$
-
-delimiter ;
 
 ## AFTER DELETE Trigger
+Update total_students value in 'stats' table whenever a record is deleted in 'students' table
+
 ``` sql
 DELIMITER $$
 CREATE TRIGGER after_student_delete
@@ -150,14 +160,16 @@ END$$
 DELIMITER ;
 ```
 
-delimiter $$
-
-create trigger after_student_delete after delete on students for each row begin declare studcount int; select count(*) into studcount from students; update stats set total_students = studcount where id=1; end$$
-
-delimiter ;
-
 
 ## Connection Code
+
+Replace database name, username and password in Java_mysql.java
+Here,
+MySQL Port: 3306
+Database name: student
+MySQL User: sanul
+MySQL Password: sanul123
+
 ```java
 import java.sql.*;
 import java.util.logging.Level;
@@ -199,5 +211,18 @@ show triggers from student;
 
 ## Drop trigger
 ```sql
-DROP TRIGGER before_billing_update;
+DROP TRIGGER trigger_name;
 ```
+
+## Output
+
+<p align="center">
+<img style="padding:10px" src="/output/home.png"/>
+<img style="padding:10px" src="/output/createRecord.png" /> 
+<img style="padding:10px" src="/output/viewCreated.png"/>
+<img style="padding:10px" src="/output/updateRecord.png" width="400" /> 
+<img style="padding:10px" src="/output/updateSuccess.png" width="400"/>
+<img style="padding:10px" src="/output/viewUpdated.png" /> 
+<img style="padding:10px" src="/output/deleteRecord.png" />
+<img style="padding:10px" src="/output/viewDeleted.png" /> 
+</p>

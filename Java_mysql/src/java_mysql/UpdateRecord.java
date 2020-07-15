@@ -356,7 +356,7 @@ public class UpdateRecord extends javax.swing.JFrame {
             emailTextField.setText(email);
             mobileTextField.setText(mobile);
 
-            if (gender == "Male") {
+            if (gender.equals("Male")) {
                 maleButton.setSelected(true);
             } else {
                 femaleButton.setSelected(true);
